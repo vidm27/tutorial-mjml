@@ -1,0 +1,127 @@
+<mjml>
+  <mj-head>
+    <mj-title>TuLavanderia Premium</mj-title>
+    <mj-preview>Servicios premium de lavandería para ti</mj-preview>
+    <mj-attributes>
+      <mj-all font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-all>
+      <mj-text font-weight="400" font-size="16px" color="#000000" line-height="24px" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-text>
+    </mj-attributes>
+    <mj-style inline="inline">.body-section {
+      -webkit-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      }</mj-style>
+    <mj-style inline="inline">.text-link {
+      color: #0078BF
+      }</mj-style>
+    <mj-style inline="inline">.footer-link {
+      color: #888888
+      }</mj-style>
+  </mj-head>
+  <mj-body background-color="#E7E7E7" width="600px">
+    <mj-section full-width="full-width" background-color="#0078BF" padding-bottom="0px">
+      <mj-column width="100%">
+        <mj-image src="cid:logo-premium" alt="TuLavanderia" align="center" width="150px"></mj-image>
+        <mj-text color="#ffffff" font-weight="bold" align="center" text-transform="uppercase" font-size="16px" letter-spacing="1px" padding-top="30px">Ciudad de Panamá
+          <br />
+          <span style="color: #B5E2FF; font-weight: normal">-</span>
+        </mj-text>
+        <mj-text color="#B5E2FF" align="center" font-size="13px" padding-top="0" font-weight="bold" text-transform="uppercase" letter-spacing="1px" line-height="20px">TuLavanderia Premium
+          <br />
+          Calle Principal 123, Ciudad
+        </mj-text>
+        <mj-image src="cid:header-top" width="600px" alt="" padding="0px"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#005A8F">
+      <mj-column width="100%">
+        <mj-image src="cid:header-bottom" width="600px" alt="" padding="0px"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-wrapper padding-top="0" padding-bottom="0px" css-class="body-section">
+      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
+        <mj-column width="100%">
+          <mj-text color="#212b35" font-weight="bold" font-size="20px">Servicios Premium de Lavandería ahora disponibles</mj-text>
+          <mj-text color="#637381" font-size="16px">Hola {{ nombre_cliente }},</mj-text>
+          <mj-text color="#637381" font-size="16px">Nos complace anunciar que hemos lanzado nuestros nuevos servicios premium de lavandería para que disfrutes de la mejor atención y calidad en el cuidado de tus prendas. Nuestro equipo de expertos utilizará productos de alta calidad y técnicas especializadas para que tus prendas queden como nuevas.</mj-text>
+          <mj-text color="#637381" font-size="16px">Algunos de nuestros servicios premium incluyen:</mj-text>
+          <mj-text color="#637381" font-size="16px">
+            <ul>
+              <li style="padding-bottom: 20px"><strong>Lavado ecológico:</strong> Utilizamos productos biodegradables que cuidan tus prendas y el medio ambiente.</li>
+              <li style="padding-bottom: 20px"><strong>Tratamiento de manchas difíciles:</strong> Nuestros especialistas pueden eliminar hasta las manchas más persistentes sin dañar la tela.</li>
+              <li><strong>Servicio a domicilio express:</strong> Recogida y entrega en menos de 24 horas para emergencias de vestuario.</li>
+            </ul>
+          </mj-text>
+          <mj-text color="#637381" font-size="16px" padding-bottom="30px">Visita <a class="text-link" href="{{ link_servicios }}">nuestra página de servicios</a> para conocer todas las opciones disponibles y los precios especiales de lanzamiento. ¡No te pierdas esta oportunidad!</mj-text>
+          <mj-button background-color="#0078BF" align="center" color="#ffffff" font-size="17px" font-weight="bold" href="{{ link_servicios }}" width="300px">Ver Servicios Premium</mj-button>
+          <mj-button background-color="#0078BF" align="center" color="#ffffff" font-size="17px" font-weight="bold" href="{{ link_servicios }}/reservar" width="300px">Reservar Ahora</mj-button>
+          <mj-text color="#637381" font-size="16px" padding-top="30px">Para celebrar este lanzamiento, ofrecemos un <strong>25% de descuento</strong> en tu primer servicio premium. Simplemente menciona el código <span style="color:#0078BF; font-weight:bold;">PREMIUM25</span> al hacer tu reserva online o presencial.</mj-text>
+          <mj-text color="#637381" font-size="16px" padding-bottom="0px">¡Déjanos sorprenderte con resultados perfectos en cada prenda!</mj-text>
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px" padding-top="0">
+        <mj-column width="50%">
+          <mj-image align="center" src="cid:premium-image1" alt="Servicio Premium"></mj-image>
+        </mj-column>
+        <mj-column width="50%">
+          <mj-image align="center" src="cid:premium-image2" alt="Calidad Garantizada"></mj-image>
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px" padding-top="0">
+        <mj-column width="100%">
+          <mj-divider border-color="#DFE3E8" border-width="1px"></mj-divider>
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="#ffffff" padding="0 15px 0 15px">
+        <mj-column width="100%">
+          <mj-text color="#212b35" font-weight="bold" font-size="20px" padding-bottom="0px">¡Visítanos hoy mismo!</mj-text>
+          <mj-text color="#637381" font-size="16px">Estamos ansiosos por atenderte y superar tus expectativas.</mj-text>
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
+        <mj-column width="50%">
+          <mj-text color="#212b35" font-size="12px" text-transform="uppercase" font-weight="bold" padding-bottom="0px">Dirección</mj-text>
+          <mj-text color="#637381" font-size="14px" padding-top="0">TuLavanderia Premium
+            <br />
+            Calle Principal 123, Ciudad
+          </mj-text>
+        </mj-column>
+        <mj-column width="50%">
+          <mj-text color="#212b35" font-size="12px" text-transform="uppercase" font-weight="bold" padding-bottom="0px">Horario de Atención</mj-text>
+          <mj-text color="#637381" font-size="14px" padding-top="0">Lunes a Viernes: 7:00 AM - 8:00 PM
+            <br />
+            Sábados: 8:00 AM - 6:00 PM
+            <br />
+            Domingos: 9:00 AM - 2:00 PM
+          </mj-text>
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
+        <mj-column width="100%">
+          <mj-image src="cid:mapa-ubicacion" alt="Ubicación TuLavanderia"></mj-image>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+    <mj-wrapper full-width="full-width">
+      <mj-section>
+        <mj-column width="100%" padding="0px">
+          <mj-social font-size="15px" icon-size="30px" mode="horizontal" padding="0px" align="center">
+            <mj-social-element name="facebook"></mj-social-element>
+            <mj-social-element name="instagram"></mj-social-element>
+            <mj-social-element name="twitter"></mj-social-element>
+          </mj-social>
+          <mj-text color="#445566" font-size="11px" font-weight="bold" align="center">Ver este correo en tu navegador</mj-text>
+          <mj-text color="#445566" font-size="11px" align="center" line-height="16px">Estás recibiendo este correo electrónico porque te registraste en TuLavanderia. (Calle Principal 123, Ciudad) y aceptaste recibir correos sobre nuevos servicios, eventos y ofertas especiales.</mj-text>
+          <mj-text color="#445566" font-size="11px" align="center" line-height="16px">&copy; TuLavanderia S.A., Todos los Derechos Reservados.</mj-text>
+        </mj-column>
+      </mj-section>
+      <mj-section padding-top="0">
+        <mj-group>
+          <mj-column width="100%" padding-right="0px">
+            <mj-text color="#445566" font-size="11px" align="center" line-height="16px" font-weight="bold"><a class="footer-link" href="#">Privacidad</a>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<a class="footer-link" href="#">Darse de baja</a></mj-text>
+          </mj-column>
+        </mj-group>
+      </mj-section>
+    </mj-wrapper>
+  </mj-body>
+</mjml> 

@@ -1,0 +1,47 @@
+<mjml>
+  <mj-head>
+    <mj-title>Bienvenido a TuLavanderia</mj-title>
+    <mj-preview>¡Gracias por unirte a TuLavanderia!</mj-preview>
+    <mj-attributes>
+      <mj-all font-family="Arial, sans-serif" />
+      <mj-text font-size="16px" line-height="150%" color="#000000" />
+      <mj-button background-color="#007bff" color="#ffffff" font-size="14px" border-radius="4px" />
+    </mj-attributes>
+    <mj-style inline="inline">
+      .link-color {
+        color: #007bff !important;
+        text-decoration: none !important;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#f4f4f4">
+    <mj-section background-color="#ffffff">
+      <mj-column>
+        <mj-image width="100px" src="cid:logo" alt="Logo TuLavanderia"></mj-image>
+        <mj-divider border-color="#eeeeee"></mj-divider>
+        <mj-text font-size="20px" font-weight="bold">
+          ¡Bienvenido a TuLavanderia, {{ nombre_cliente }}!
+        </mj-text>
+        <mj-text>
+          Estamos muy contentos de tenerte con nosotros. Prepárate para disfrutar de la comodidad de nuestro servicio.
+        </mj-text>
+        <mj-image width="400px" src="cid:banner" alt="Bienvenida"></mj-image>
+        <mj-text>
+          Explora nuestros servicios <a href="{{ link_servicios }}" class="link-color">aquí</a>.
+        </mj-text>
+        <mj-button href="{{ link_servicios }}">
+          Ver Servicios
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-text align="center" color="#888888" font-size="12px">
+          © 2024 TuLavanderia. Todos los derechos reservados.<br />
+          <a href="#" class="link-color">Darse de baja</a> | <a href="#" class="link-color">Ver en navegador</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

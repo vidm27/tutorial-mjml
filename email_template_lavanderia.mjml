@@ -1,0 +1,79 @@
+<mjml>
+  <mj-head>
+    <mj-title>Bienvenido a TuLavanderia</mj-title>
+    <mj-preview>¡Gracias por unirte a nuestro servicio de lavandería!</mj-preview>
+    <mj-attributes>
+      <mj-all font-family="Arial, sans-serif" />
+      <mj-text font-size="16px" line-height="150%" color="#000000" />
+      <mj-button background-color="#0078BF" color="#ffffff" font-size="16px" border-radius="8px" />
+    </mj-attributes>
+    <mj-style inline="inline">
+      .link-color {
+        color: #0078BF !important;
+        text-decoration: none !important;
+      }
+      .destacado {
+        color: #FFFFFF !important;
+        font-weight: bold !important;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#ffffff" font-size="15px">
+    <!-- Encabezado con banner -->
+    <mj-section background-color="#ffffff" padding-bottom="0px" padding-top="0">
+      <mj-column vertical-align="top" width="100%">
+        <mj-image src="cid:logo-banner" alt="TuLavanderia" align="center" border="none" width="600px" padding-left="0px" padding-right="0px" padding-bottom="0px" padding-top="0"></mj-image>
+      </mj-column>
+    </mj-section>
+    
+    <!-- Sección con título principal -->
+    <mj-section background-color="#0078BF" vertical-align="top" padding-bottom="0px" padding-top="0">
+      <mj-column vertical-align="top" width="100%">
+        <mj-text align="left" color="#ffffff" font-size="38px" font-weight="bold" font-family="Arial, sans-serif" padding-left="25px" padding-right="25px" padding-bottom="30px" padding-top="50px">¡Bienvenido a bordo!</mj-text>
+      </mj-column>
+    </mj-section>
+    
+    <!-- Contenido principal -->
+    <mj-section background-color="#0078BF" padding-bottom="20px" padding-top="20px">
+      <mj-column vertical-align="middle" width="100%">
+        <mj-text align="left" color="#ffffff" font-size="22px" font-family="Arial, sans-serif" padding-left="25px" padding-right="25px">
+          <span style="color:#FFFFFF; font-weight:bold;">Estimado(a) {{ nombre_cliente }}</span>
+          <br /><br /> 
+          Bienvenido a TuLavandería, donde la limpieza se encuentra con la comodidad.
+        </mj-text>
+        
+        <mj-text align="left" color="#ffffff" font-size="16px" font-family="Arial, sans-serif" padding-left="25px" padding-right="25px">
+          Estamos muy contentos de que hayas decidido probar nuestro servicio. Te garantizamos que tu ropa estará impecable y fresca, lista cuando la necesites.
+          <br /><br />
+          Si tienes alguna pregunta, no dudes en contactarnos al <span style="font-weight:bold;">info@tulavanderia.com</span> o al <span style="font-weight:bold;">+507 123-4567</span>.
+        </mj-text>
+        
+        <mj-image width="200px" src="cid:icon-lavanderia" alt="Servicio de Lavandería" align="center" padding="20px"></mj-image>
+        
+        <mj-button href="{{ link_servicios }}" align="left" font-size="18px" font-weight="bold" background-color="#ffffff" border-radius="8px" color="#0078BF" font-family="Arial, sans-serif">
+          Ver Nuestros Servicios
+        </mj-button>
+        
+        <mj-text align="left" color="#ffffff" font-size="16px" font-family="Arial, sans-serif" padding-left="25px" padding-right="25px">
+          Nuestros horarios de atención:<br/>
+          Lunes a Viernes: 7:00 AM - 8:00 PM<br/>
+          Sábados: 8:00 AM - 6:00 PM<br/>
+          Domingos: 9:00 AM - 2:00 PM
+          <br /><br />
+          Gracias por confiar en nosotros,<br /> 
+          El Equipo de TuLavandería
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    
+    <!-- Pie de página -->
+    <mj-section background-color="#f4f4f4" padding="10px">
+      <mj-column>
+        <mj-text align="center" color="#888888" font-size="12px">
+          © 2024 TuLavanderia. Todos los derechos reservados.<br/>
+          <a href="#" class="link-color">Darse de baja</a> | <a href="#" class="link-color">Ver en navegador</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml> 

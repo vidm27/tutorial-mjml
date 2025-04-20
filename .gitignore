@@ -1,0 +1,4 @@
+.env
+output_*.html
+__pycache__
+.idea
