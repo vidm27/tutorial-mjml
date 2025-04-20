@@ -8,8 +8,10 @@ Este proyecto demuestra cómo crear plantillas de correo electrónico HTML respo
 - Personalización de plantillas con parámetros usando Jinja2
 - Renderizado de plantillas a HTML
 - Manejo automático de rutas de imágenes para correcta visualización en correos
-- Soporte para imágenes incrustadas como base64 directamente en el HTML
+- Soporte para imágenes incrustadas como CID (Content-ID) para visualización en clientes de correo
 - Envío de correos electrónicos con el contenido HTML generado
+- Múltiples diseños de plantillas para diferentes casos de uso (estándar, lavandería, premium)
+- Configuración mediante variables de entorno (.env)
 
 ## Requisitos
 
@@ -17,23 +19,41 @@ Este proyecto demuestra cómo crear plantillas de correo electrónico HTML respo
 - Paquetes de Python:
   - mjml (`pip install mjml`)
   - jinja2 (`pip install jinja2`)
+  - python-dotenv (`pip install python-dotenv`)
 
 ## Estructura del Proyecto
 
-- `email_template.mjml`: Plantilla de correo en formato MJML con variables Jinja2
-- `email_template_base64.mjml`: Plantilla de correo que usa imágenes incrustadas como base64
+- `email_template.mjml`: Plantilla de correo básica en formato MJML con variables Jinja2
+- `email_template_lavanderia.mjml`: Plantilla especializada para un servicio de lavandería
+- `email_template_premium.mjml`: Plantilla con diseño premium y más elementos visuales
 - `render_email.py`: Funciones para renderizar plantillas y enviar correos
-- `ejemplo_uso.py`: Ejemplos de uso de las funciones
-- `enviar_correo_base64.py`: Script para enviar correos con imágenes base64
-- `ejemplo_correo_base64.py`: Ejemplo completo de envío de correo con imágenes base64 y demostración de codificación
+- `output_email_template.html`: HTML generado a partir de la plantilla básica
+- `output_email_template_lavanderia.html`: HTML generado a partir de la plantilla de lavandería
+- `output_email_template_premium.html`: HTML generado a partir de la plantilla premium
 - `img/`: Directorio para imágenes utilizadas en las plantillas
+- `pyproject.toml`: Configuración de dependencias del proyecto
+- `.env`: Archivo para configuración de variables de entorno (no incluido en el repositorio)
+
+## Configuración de Variables de Entorno
+
+Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
+
+```
+GMAIL_SERVER=smtp.gmail.com
+GMAIL_PORT=587
+GMAIL_SENDER_EMAIL=tu_correo@gmail.com
+GMAIL_APP_PASSWORD=tu_contraseña_o_clave_de_aplicación
+EMAIL_RECEIVER=destinatario@ejemplo.com
+```
 
 ## Uso Básico
 
-### 1. Renderizar una Plantilla
+### 1. Renderizar y Enviar una Plantilla
+
+El proyecto incluye la función `render_and_send_email` que realiza todo el proceso:
 
 ```python
-from render_email import render_email_template
+from render_email import render_and_send_email
 
 # Datos para personalizar la plantilla
 contexto = {
@@ -41,43 +61,41 @@ contexto = {
     'link_servicios': 'https://ejemplo.com/servicios'
 }
 
-# Definir una URL base para las imágenes (importante para que se muestren correctamente)
-base_url = "https://midominio.com/assets/"
+# Configurar imágenes para la plantilla
+images = {
+    'logo': 'img/logo.png',
+    'banner': 'img/banner.jpg'
+}
 
-# Renderizar la plantilla y obtener HTML
-html_output = render_email_template('email_template.mjml', contexto, base_url)
-
-# Guardar el HTML generado (opcional)
-with open('email_output.html', 'w') as f:
-    f.write(html_output)
+# Renderizar y enviar la plantilla
+render_and_send_email(
+    template_file='email_template.mjml',
+    context=contexto,
+    recipient='destinatario@ejemplo.com',
+    subject='Bienvenido a Nuestro Servicio',
+    images=images
+)
 ```
 
-### 2. Enviar un Correo con la Plantilla Renderizada
+### 2. Enviar un Correo con Imágenes CID (Content-ID)
+
+Para enviar imágenes que se visualizan correctamente en clientes de correo:
 
 ```python
-from render_email import render_email_template, send_email
+from render_email import send_email_with_images
 
-# Datos para personalizar la plantilla
-contexto = {
-    'nombre_cliente': 'Ana García',
-    'link_servicios': 'https://ejemplo.com/servicios'
+# Configurar imágenes con sus CID
+imagenes = {
+    'logo': 'img/logo.png',  # Se referencia en el HTML como <img src="cid:logo">
+    'banner': 'img/banner.jpg'
 }
 
-# Definir una URL base para las imágenes (importante para que se muestren correctamente)
-base_url = "https://midominio.com/assets/"
-
-# Renderizar la plantilla
-html_output = render_email_template('email_template.mjml', contexto, base_url)
-
-# Enviar el correo
-send_email(
+# Enviar el correo con las imágenes adjuntas
+send_email_with_images(
     recipient_email="destinatario@ejemplo.com",
     subject="Bienvenido a Nuestro Servicio",
-    html_content=html_output,
-    sender_email="tu_correo@gmail.com",
-    smtp_password="tu_contraseña_o_clave_de_aplicación",
-    smtp_server="smtp.gmail.com",
-    smtp_port=587
+    html_content=html_content,
+    images=imagenes
 )
 ```
 
@@ -99,153 +117,80 @@ En el archivo MJML, puedes incluir variables de Jinja2 usando la sintaxis `{{ no
 
 ### Pasar Variables a la Plantilla
 
-Cuando llamas a la función `render_email_template`, pasa un diccionario con los valores para las variables:
+Cuando llamas a la función `render_and_send_email`, pasa un diccionario con los valores para las variables:
 
 ```python
 contexto = {
     'nombre_cliente': 'Juan Pérez',
     'link_servicios': 'https://miservicio.com/ofertas-especiales'
 }
+```
 
-html_output = render_email_template('email_template.mjml', contexto)
+### Plantillas Disponibles
+
+#### 1. Plantilla Básica (email_template.mjml)
+
+Plantilla simple con un diseño básico para correos generales.
+
+#### 2. Plantilla de Lavandería (email_template_lavanderia.mjml)
+
+Diseño específico para un servicio de lavandería, con secciones para promociones y servicios.
+
+#### 3. Plantilla Premium (email_template_premium.mjml)
+
+Diseño avanzado con múltiples secciones, imágenes destacadas y promociones. Incluye variables adicionales como:
+
+```python
+contexto_premium = {
+    'nombre_cliente': 'Juan Pérez',
+    'link_servicios': 'https://miservicio.com/ofertas-especiales',
+    'codigo_descuento': 'PREMIUM25',
+    'porcentaje_descuento': '25%'
+}
 ```
 
 ### Manejo de Imágenes en Correos Electrónicos
 
-Un problema común al enviar correos HTML es que las imágenes con rutas relativas (como `img/logo.png`) no se muestran correctamente porque los clientes de correo no tienen acceso al sistema de archivos local.
+Un problema común al enviar correos HTML es que las imágenes no se muestran correctamente porque los clientes de correo no tienen acceso a las rutas de imágenes.
 
-#### Opción 1: Usar URLs absolutas
+#### Uso de Imágenes CID (Content-ID)
 
-La función `render_email_template` acepta un parámetro `base_url` que convierte automáticamente las rutas relativas de imágenes a URLs absolutas:
+El proyecto utiliza el enfoque CID para adjuntar imágenes que se muestran correctamente en clientes de correo:
 
-```python
-# Usar una URL base donde están alojadas tus imágenes (recomendado para producción)
-base_url = "https://midominio.com/assets/"
-html_output = render_email_template('email_template.mjml', contexto, base_url)
-
-# O usar la ruta absoluta local (útil para pruebas)
-html_output = render_email_template('email_template.mjml', contexto)
-```
-
-Para que las imágenes se muestren correctamente en los correos enviados:
-
-1. Sube tus imágenes a un servidor web accesible públicamente
-2. Especifica la URL base de ese servidor al llamar a `render_email_template`
-3. En la plantilla MJML, usa rutas relativas para las imágenes (ej: `img/logo.png`)
-
-#### Opción 2: Usar imágenes incrustadas como base64
-
-Otra opción es incrustar las imágenes directamente en el HTML como datos base64. Esto tiene la ventaja de que las imágenes siempre se mostrarán correctamente, incluso sin conexión a internet, pero aumenta el tamaño del correo.
-
-Para usar imágenes base64:
-
-1. En la plantilla MJML, usa la etiqueta `<mj-raw>` con una imagen que tenga una URL de datos base64:
+1. En la plantilla HTML, referenciar las imágenes con `cid:`:
 
 ```html
-<mj-raw>
-  <div style="text-align: center; margin-bottom: 20px;">
-    <img src="data:image/png;base64,{{ logo_base64 }}" alt="Logo" style="width: 100px; height: auto;">
-  </div>
-</mj-raw>
+<img src="cid:logo" alt="Logo">
 ```
 
-2. Al llamar a `render_email_template`, proporciona un diccionario con las rutas de las imágenes a codificar:
+2. Al enviar el correo, proporcionar un diccionario con los CID y rutas de las imágenes:
 
 ```python
-from render_email import render_email_template, encode_image_to_base64
-
-# Datos para personalizar la plantilla
-contexto = {
-    'nombre_cliente': 'Juan Pérez',
-    'link_servicios': 'https://ejemplo.com/servicios'
+imagenes = {
+    'logo': 'img/logo.png',
+    'banner': 'img/banner.jpg'
 }
-
-# Rutas de las imágenes a codificar en base64
-imagenes_base64 = {
-    'logo_base64': 'img/logo.png',
-    'banner_base64': 'img/banner.jpg'
-}
-
-# Renderizar la plantilla con las imágenes en base64
-html_output = render_email_template(
-    'email_template_base64.mjml', 
-    contexto,
-    base64_images=imagenes_base64
-)
 ```
 
-La función `render_email_template` se encargará de leer las imágenes, codificarlas en base64 y pasarlas a la plantilla.
+La función `send_email_with_images` se encargará de adjuntar las imágenes con los Content-ID correctos.
 
-## Ejemplos
+## Ejecutar el Proyecto
 
-### Ejemplos de Uso Básico
-
-Consulta el archivo `ejemplo_uso.py` para ver ejemplos completos de cómo:
-
-1. Crear un correo de bienvenida personalizado
-2. Crear un correo promocional con diferentes parámetros
-3. Crear un correo con imágenes incrustadas como base64
-4. Guardar el HTML generado
-5. Enviar el correo electrónico
-
-### Enviar Correo con Imágenes Base64
-
-#### Opción 1: Script básico
-
-Para enviar directamente un correo con imágenes codificadas en base64, puedes usar el script `enviar_correo_base64.py`:
+Para ejecutar el proyecto y enviar correos, simplemente ejecuta el archivo `render_email.py`:
 
 ```bash
-python enviar_correo_base64.py
+python render_email.py
 ```
 
-Este script:
-1. Carga una plantilla MJML que usa imágenes base64
-2. Codifica automáticamente las imágenes especificadas
-3. Renderiza la plantilla con los datos proporcionados
-4. Guarda el HTML generado en un archivo
-5. Envía el correo electrónico
-
-#### Opción 2: Ejemplo completo con demostración
-
-Para un ejemplo más completo que incluye una demostración de cómo funciona la codificación base64, puedes usar el script `ejemplo_correo_base64.py`:
-
-```bash
-python ejemplo_correo_base64.py
-```
-
-Este script ofrece:
-1. Una demostración de cómo se codifica una imagen en base64
-2. Visualización de los primeros caracteres del string base64 generado
-3. Un ejemplo de cómo se usaría la imagen base64 en HTML
-4. Guardado del string base64 completo en un archivo de texto
-5. Un ejemplo completo de envío de correo con imágenes base64
-6. Instrucciones detalladas para personalizar el ejemplo
-
-Es ideal para entender paso a paso cómo funciona la codificación base64 de imágenes y cómo se integra en correos electrónicos.
-
-#### Configuración para envío de correos
-
-Antes de ejecutar cualquiera de los scripts, asegúrate de modificar los siguientes valores:
-- `recipient_email`: Correo del destinatario
-- `sender_email`: Tu correo electrónico
-- `smtp_password`: Tu contraseña o clave de aplicación
-
-```python
-enviado = send_email(
-    recipient_email="destinatario@ejemplo.com",  # Reemplaza con el correo del destinatario real
-    subject="¡Bienvenido a TuLavanderia con imágenes Base64!",
-    html_content=html_resultado,
-    sender_email="tu_correo@gmail.com",  # Reemplaza con tu correo
-    smtp_password="tu_contraseña_segura"  # Reemplaza con tu contraseña o clave de aplicación
-)
-```
+El script por defecto enviará la plantilla premium al destinatario configurado en el archivo `.env`.
 
 ## Notas para Gmail
 
 Si utilizas Gmail para enviar correos, necesitarás:
 
-1. Habilitar el acceso de aplicaciones menos seguras, o
-2. Usar una "contraseña de aplicación" (recomendado)
+1. Habilitar la verificación en dos pasos para tu cuenta de Google
+2. Crear una "contraseña de aplicación" específica para la aplicación
+3. Usar esa contraseña en la variable `GMAIL_APP_PASSWORD`
 
 Más información: https://support.google.com/accounts/answer/185833
 
@@ -253,3 +198,4 @@ Más información: https://support.google.com/accounts/answer/185833
 
 - [Documentación de MJML](https://mjml.io/documentation/)
 - [Documentación de Jinja2](https://jinja.palletsprojects.com/)
+- [Documentación de python-dotenv](https://pypi.org/project/python-dotenv/)
